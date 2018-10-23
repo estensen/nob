@@ -24,6 +24,8 @@ func getExplanation(word string) string {
 		fmt.Println(err)
 	}
 
+	// TODO: Parse body
+
 	return string(body)
 }
 
