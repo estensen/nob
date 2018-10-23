@@ -19,25 +19,20 @@ func getExplanation(word string) {
 	}
 
 	for _, n := range htmlquery.Find(doc, `//*[@id="byttutBM"]/tbody/tr[2]/td[2]/div/div[2]`) {
-		//*[@id="art22888"]/div[2]
-		//*[@id="art22723"]/div[2]
-		//*[@id="art17346"]/div[2]
-
-
-		//*[@id="byttutBM"]/tbody
-
-
-		//*[@id="byttutBM"]/tbody/tr[2]/td[2]
-
-
 		a := htmlquery.FindOne(n, "//span[2]")
 		fmt.Printf("%s\n", htmlquery.InnerText(a))
 
-		//*[@id="art22892"]/div[2]/span[5]/div[1]/text()
-		//*[@id="art22892"]/div[2]/span[5]/div[1]/div/span[1]/span/text()
-		//*[@id="art22892"]/div[2]/span[5]/div[1]
-		b := htmlquery.FindOne(n, "//span[6]/div")
-		fmt.Printf("%s\n", htmlquery.InnerText(b))
+		// Example path:
+		// 2888"]/div[2]/span[6]/div[1]
+		list := htmlquery.Find(n, "//span")
+		for _, element := range list[4:8] {
+			b := htmlquery.Find(element, "//div")
+
+			// TODO: Filter "kompakt" or "utvidet"
+			for _, c := range b {
+				fmt.Printf("%s\n", htmlquery.InnerText(c))
+			}
+		}
 	}
 }
 
